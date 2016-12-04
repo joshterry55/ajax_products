@@ -33,6 +33,10 @@ $(document).ready(function() {
   var $purchasesTable = $('#purchases-table');
   var purchaseToggle = 0
   var $purchases = $('#purchases');
+
+  var sumPurchase = 0
+  var $totalPurchases = $('#total-purchases');
+
   var BASEURL = 'http://devpoint-ajax-example-server.herokuapp.com/api/v1';
 
 
@@ -166,12 +170,16 @@ $(document).ready(function() {
 
   $purchaseYes.submit(function(e) {
     e.preventDefault()
-    console.log($(this).attr('product-name'));
-    product2 = $(this).attr('product-name');
-    price2 = $(this).attr('product-price')
-
-    quantity2 = $quantityNeeded.val();
-    console.log(quantity2)
+    var product2 = $(this).attr('product-name');
+    var price2 = $(this).attr('product-price');
+    var quantity2 = $quantityNeeded.val();
+    var thisTest2 = (parseInt(price2) * parseInt(quantity2))
+    console.log(price2)
+    console.log(sumPurchase)
+    var thisTest = (parseInt(sumPurchase) + parseInt(thisTest2))
+    console.log(thisTest)
+    sumPurchase = thisTest
+    console.log(sumPurchase)
 
     var quantity =$(this).attr('quantity')
     if(quantity >= quantity2) {
@@ -195,7 +203,10 @@ $(document).ready(function() {
         $purchaseYes[0].reset();
         $purchases.append('<tr class="row">' + '<td class="col s3">' + product2 + '</td>'
                                 + '<td class="col s3">' + quantity2 + '</td>'
-                                + '<td class="col s3">' + '$ ' + (price2 * quantity2) + '</td>' + '</tr>')
+                                + '<td class="col s3">' + '$ ' + price2+ '</td>'
+                                + '<td class="sumthis col s3">' + '$ ' + (price2 * quantity2) + '</td>' + '</tr>');
+
+        $totalPurchases.text("$ " + sumPurchase)
       }).fail(function(data) {
 
       })
