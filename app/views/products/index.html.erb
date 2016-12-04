@@ -1,0 +1,108 @@
+<div class="center">
+<h2 class=''>Products</h2>
+<button id="form-toggle" class='btn indigo'>Add Product</button>
+</div>
+<!-- <div id='form-toggle' class="btn btn-center">
+  Add Product
+</div > -->
+<!-- <div class="row">
+  <button id="form-toggle" class='btn btn-center center'>Add Product</button>
+</div> -->
+<br>
+
+<div class='container joshtest'>
+  <!-- <div id='form-toggle' class="btn center">
+    Add Product
+  </div > -->
+    <form id='add-product-form' method="POST" action='api/v1/products'>
+      <label class="black-text">Product Name</label>
+      <input id='product-name' type='text' name='product[name]' required />
+      <br>
+      <label class="black-text">Base Price</label>
+      <input id='product-price' type='text' name='product[base_price]' required />
+      <br>
+      <label class="black-text">Description</label>
+      <input id='product-description' type='text' name='product[description]' />
+      <br>
+      <label class="black-text">Quantity</label>
+      <input id='product-quantity' type='text' name='product[quantity_on_hand]' />
+      <br>
+      <label class="black-text">Color</label>
+      <input id='product-color' type='text' name='product[color]' />
+      <br>
+      <label class="black-text">Weight</label>
+      <input id='product-weight' type='text' name='product[weight]' />
+      <br>
+      <div class="center">
+      <input type='submit' class='btn indigo' />
+      </div>
+    </form>
+    <div>
+      <br><button class='btn indigo' id='view-products'>View Products</button><br><br>
+
+      <!-- <div id="products">
+      </div> -->
+      <div id='products-table'>
+        <div class="center">
+          <button class='btn indigo' id='get-products'>Update Products</button>
+          <button class='btn red lighten-2' id='get-null-products'>Out of Stock</button><br><br>
+        </div>
+        <table id="tablestyling" class='striped'>
+         <thead>
+           <tr class='row'>
+               <th class='col s3'>Product</th>
+               <th class='col s3'>Quantity</th>
+               <th class='col s3'>Item Price</th>
+           </tr>
+         </thead>
+
+         <tbody id="products">
+           <!-- <tr class='row'>
+             <td class='col s3'>Alvin</td>
+             <td class='col s3'>Eclair</td>
+             <td class='col s3'>$0.87</td>
+             <td class='col s1'>View</td>
+             <td class='col s1'>Edit</td>
+             <td class='col s1'>Delete</td>
+           </tr> -->
+
+         </tbody>
+       </table>
+
+     </div>
+    </div>
+    <div id='show-box' class="center">
+      <p>Name: <small><span id="product_name_show"></span></small></p>
+      <p>Price: $ <span id="product_price_show"></span></p>
+      <p>Quantity: <span id="product_quantity_show"></span></p>
+      <p>Description: <span id="product_description_show"></span></p>
+      <p>Color: <span id="product_color_show"></span></p>
+      <p>Weight: <span id="product_weight_show"></span></p>
+      <div id='close' class='center btn red'>
+        Close
+      </div>
+    </div>
+    <div id="show-cancel">
+    </div>
+  <!-- <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>   -->
+</div>
