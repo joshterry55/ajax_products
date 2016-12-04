@@ -38,13 +38,38 @@
       </div>
     </form>
     <div>
-      <br><button class='btn indigo' id='view-products'>View Products</button><br><br>
+      <br><button class='btn indigo' id='view-products'>View Products</button><button class='btn indigo right' id='view-purchases'>View Purchases</button><br><br>
 
+      <div id='purchases-table'>
+        <h3 class='center'>Purchases</h3>
+        <table id="tablestyling" class='striped'>
+         <thead>
+           <tr class='row'>
+               <th class='col s3'>Product</th>
+               <th class='col s3'>Quantity</th>
+               <th class='col s3'>Item Price</th>
+           </tr>
+         </thead>
+
+         <tbody id="purchases">
+           <!-- <tr class='row'>
+             <td class='col s3'>Alvin</td>
+             <td class='col s3'>Eclair</td>
+             <td class='col s3'>$0.87</td>
+             <td class='col s1'>View</td>
+             <td class='col s1'>Edit</td>
+             <td class='col s1'>Delete</td>
+           </tr> -->
+
+         </tbody>
+       </table>
+       <br><br>
+     </div>
       <!-- <div id="products">
       </div> -->
       <div id='products-table'>
         <div class="center">
-          <button class='btn indigo' id='get-products'>Update Products</button>
+          <button class='btn indigo' id='get-products'>Products In Stock</button>
           <button class='btn red lighten-2' id='get-null-products'>Out of Stock</button><br><br>
         </div>
         <table id="tablestyling" class='striped'>

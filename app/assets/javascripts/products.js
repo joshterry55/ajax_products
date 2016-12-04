@@ -29,6 +29,10 @@ $(document).ready(function() {
   var $purchaseYes = $('#purchase-yes');
   var $purchaseNo = $('#purchase-no');
   var $quantityNeeded = $('#quantity-needed');
+  var $viewPurchases = $('#view-purchases');
+  var $purchasesTable = $('#purchases-table');
+  var purchaseToggle = 0
+  var $purchases = $('#purchases');
   var BASEURL = 'http://devpoint-ajax-example-server.herokuapp.com/api/v1';
 
 
@@ -42,6 +46,18 @@ $(document).ready(function() {
       $addProductForm.css('display', 'none');
       toggling += 1
       $formToggle.text('Add Product');
+    }
+  })
+
+  $viewPurchases.click(function(){
+    if(purchaseToggle % 2 === 0) {
+      $purchasesTable.css('display', 'block');
+      purchaseToggle += 1
+      $viewPurchases.text('Hide Purchases');
+    } else if(purchaseToggle % 2 === 1) {
+      $purchasesTable.css('display', 'none');
+      purchaseToggle += 1
+      $viewPurchases.text('View Purchases');
     }
   })
 
@@ -104,13 +120,17 @@ $(document).ready(function() {
       $productPriceShow.text(data.base_price);
       $productQuantityShow.text(data.quantity_on_hand);
       $currentQuantity = data.quantity_on_hand
+      $currentProduct = data.name
+      $currentPrice = data.base_price
       $productDescriptionShow.text(data.description);
       $productColorShow.text(data.color);
       $productWeightShow.text(data.weight);
       $showBox.css('display', 'block');
       $showCancel.css('display', 'block');
       $purchase.attr('product-id', productId);
-      $purchaseYes.attr('quantity', $currentQuantity)
+      $purchaseYes.attr('quantity', $currentQuantity);
+      $purchaseYes.attr('product-name', $currentProduct);
+      $purchaseYes.attr('product-price', $currentPrice);
     }).fail(function(data) {
 
     });
@@ -146,7 +166,9 @@ $(document).ready(function() {
 
   $purchaseYes.submit(function(e) {
     e.preventDefault()
-    console.log($(this).attr('quantity'))
+    console.log($(this).attr('product-name'));
+    product2 = $(this).attr('product-name');
+    price2 = $(this).attr('product-price')
 
     quantity2 = $quantityNeeded.val();
     console.log(quantity2)
@@ -171,6 +193,9 @@ $(document).ready(function() {
         $showBox2.css('display', 'none');
         alert('Congrats on your purchase!');
         $purchaseYes[0].reset();
+        $purchases.append('<tr class="row">' + '<td class="col s3">' + product2 + '</td>'
+                                + '<td class="col s3">' + quantity2 + '</td>'
+                                + '<td class="col s3">' + '$ ' + (price2 * quantity2) + '</td>' + '</tr>')
       }).fail(function(data) {
 
       })
