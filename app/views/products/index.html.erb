@@ -78,8 +78,29 @@
       <p>Description: <span id="product_description_show"></span></p>
       <p>Color: <span id="product_color_show"></span></p>
       <p>Weight: <span id="product_weight_show"></span></p>
+      <div id="purchase" class='center btn indigo'>
+        Purchase Item
+      </div>
       <div id='close' class='center btn red'>
         Close
+      </div>
+    </div>
+
+    <div id='show-box2' class="center">
+      <p>How many would you like to buy?</p>
+      <form id='purchase-yes' method="POST" action='api/v1/products'>
+        <div class="center">
+          <div class='container'>
+            <label class="white-text">Purchase Quantity</label>
+            <input id='quantity-needed' min="1" type='number' name='product[quantity_on_hand]' required />
+            <br>
+          </div>
+        <input type='submit' class='btn indigo' />
+        </div>
+      </form>
+      <br><br>
+      <div id='purchase-no' class='center btn red'>
+        Cancel
       </div>
     </div>
     <div id="show-cancel">

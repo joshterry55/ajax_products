@@ -16,6 +16,7 @@ $(document).ready(function() {
   var $getNullProducts = $('#get-null-products');
   var $nullProducts = $('#null-products');
   var $showBox = $('#show-box');
+  var $showBox2 = $('#show-box2');
   var $showCancel = $('#show-cancel');
   var $productNameShow = $('#product_name_show');
   var $productPriceShow = $('#product_price_show');
@@ -24,6 +25,10 @@ $(document).ready(function() {
   var $productColorShow = $('#product_color_show');
   var $productWeightShow = $('#product_weight_show');
   var $closeBox = $('#close');
+  var $purchase = $('#purchase');
+  var $purchaseYes = $('#purchase-yes');
+  var $purchaseNo = $('#purchase-no');
+  var $quantityNeeded = $('#quantity-needed');
   var BASEURL = 'http://devpoint-ajax-example-server.herokuapp.com/api/v1';
 
 
@@ -98,11 +103,14 @@ $(document).ready(function() {
       $productNameShow.text(data.name);
       $productPriceShow.text(data.base_price);
       $productQuantityShow.text(data.quantity_on_hand);
+      $currentQuantity = data.quantity_on_hand
       $productDescriptionShow.text(data.description);
       $productColorShow.text(data.color);
       $productWeightShow.text(data.weight);
       $showBox.css('display', 'block');
-      $showCancel.css('display', 'block')
+      $showCancel.css('display', 'block');
+      $purchase.attr('product-id', productId);
+      $purchaseYes.attr('quantity', $currentQuantity)
     }).fail(function(data) {
 
     });
@@ -110,13 +118,83 @@ $(document).ready(function() {
 
   $closeBox.click(function() {
     $showBox.css('display', 'none');
-    $showCancel.css('display', 'none')
+    $showCancel.css('display', 'none');
+    $showBox2.css('display', 'none')
+
+  })
+
+  $purchase.click(function() {
+    $showBox.css('display', 'none');
+    $showBox2.css('display', 'block')
+    console.log($(this).attr('product-id'))
+    var purchaseId = $(this).attr('product-id')
+    $.ajax({
+      type: "GET",
+      url: BASEURL + '/products/' + purchaseId,
+      dataType: "JSON"
+    }).success(function(data) {
+      var quantity = $(data).attr('quantity_on_hand')
+      if(quantity > 0) {
+      } else {
+
+      }
+      $purchaseYes.attr('product-id', purchaseId);
+    }).fail(function(data) {
+
+    })
+  });
+
+  $purchaseYes.submit(function(e) {
+    e.preventDefault()
+    console.log($(this).attr('quantity'))
+
+    quantity2 = $quantityNeeded.val();
+    console.log(quantity2)
+
+    var quantity =$(this).attr('quantity')
+    if(quantity >= quantity2) {
+      quantity -= quantity2
+
+      var productId = $(this).attr('product-id')
+
+      $.ajax({
+        type: 'PUT',
+        url: BASEURL + '/products/' + productId,
+        dataType: 'JSON',
+        data: { product: {
+          quantity_on_hand: quantity,
+        }}
+      }).success(function(data) {
+        loadProducts()
+        $showBox.css('display', 'none');
+        $showCancel.css('display', 'none');
+        $showBox2.css('display', 'none');
+        alert('Congrats on your purchase!');
+        $purchaseYes[0].reset();
+      }).fail(function(data) {
+
+      })
+    } else {
+      // $showBox.css('display', 'none');
+      // $showCancel.css('display', 'none');
+      // $showBox2.css('display', 'none');
+      alert('You have exceeded the in stock limit!');
+      $purchaseYes[0].reset();
+    }
   })
 
   $showCancel.click(function() {
     $showBox.css('display', 'none');
-    $showCancel.css('display', 'none')
-  })
+    $showCancel.css('display', 'none');
+    $showBox2.css('display', 'none');
+
+  });
+
+  $purchaseNo.click(function() {
+    $showBox.css('display', 'none');
+    $showCancel.css('display', 'none');
+    $showBox2.css('display', 'none');
+  });
 
   $(document).on('click', '.delete-product', function() {
     console.log($(this).parent().attr('id'))
