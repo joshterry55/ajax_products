@@ -172,10 +172,14 @@ $(document).ready(function() {
     e.preventDefault()
     var product2 = $(this).attr('product-name');
     var price2 = $(this).attr('product-price');
+    
+    if(price2 === undefined) {
+      price2 = 0
+    }
     var quantity2 = $quantityNeeded.val();
     var thisTest2 = (parseInt(price2) * parseInt(quantity2))
-    console.log(price2)
-    console.log(sumPurchase)
+    // console.log(price2)
+    // console.log(sumPurchase)
     var thisTest = (parseInt(sumPurchase) + parseInt(thisTest2))
     console.log(thisTest)
     sumPurchase = thisTest
