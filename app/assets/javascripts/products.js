@@ -172,7 +172,7 @@ $(document).ready(function() {
     e.preventDefault()
     var product2 = $(this).attr('product-name');
     var price2 = $(this).attr('product-price');
-    
+
     if(price2 === undefined) {
       price2 = 0
     }
@@ -203,7 +203,7 @@ $(document).ready(function() {
         $showBox.css('display', 'none');
         $showCancel.css('display', 'none');
         $showBox2.css('display', 'none');
-        alert('Congrats on your purchase!');
+        alert('Congrats on your purchase!' + ' We hope you enjoy the ' + "'" + product2 + "'");
         $purchaseYes[0].reset();
         $purchases.append('<tr class="row">' + '<td class="col s3">' + product2 + '</td>'
                                 + '<td class="col s3">' + quantity2 + '</td>'
